@@ -1,0 +1,128 @@
+\documentclass[aspectratio=169]{beamer}
+
+%=======================
+%       IMPORTS
+%=======================
+
+\usepackage{amsmath, amsthm, amssymb}   % Math symbols, environments etc.
+\usepackage{fontspec}                   % For Unicode fonts
+\usepackage{unicode-math}               % For Unicode math fonts
+\usepackage{microtype}                  % Nicer interword spacing
+\usepackage{polyglossia}                % Provides locale-specific formatting
+\usepackage{csquotes}
+\usepackage{caption}                    % Provides captions outside of floats
+\usepackage{svg}                        % For including SVG files
+\usepackage{booktabs}                   % Nicer tables
+\usepackage{tabularx}                   % Allows for linebreaks in tables
+
+\usepackage[
+    backend = biber,
+    style = ieee-alphabetic
+]{biblatex}
+
+% Set beamer theme
+\usetheme{metropolis}
+% \beamertemplatenavigationsymbolsempty
+\metroset
+{
+    sectionpage = simple,
+    subsectionpage = simple
+}
+
+\usecolortheme{rose}
+
+\setmathfont{TeX Gyre Pagella Math}
+
+% Captions
+\captionsetup{justification=centering}
+
+% Language Setup
+\setdefaultlanguage[spelling=new, babelshorthands=true]{german}
+
+% Set path for graphics
+\graphicspath{{./graphics/}}
+
+% hyperref setup
+\hypersetup
+{
+    pdfencoding = auto      % For umlauts in PDF sections
+}
+
+%=======================
+%    CUSTOM COMMANDS
+%=======================
+\newcommand{\Ham}{\ensuremath{\mathbb{H}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}{ }}
+
+%=======================
+%  DOCUMENT INFORMATION
+%=======================
+
+\title{\textsc{Hamilton}sche Quaternionen}
+\subtitle{Proseminar Mathematik}
+\author[L.~Richardt]{Leon Richardt}
+\date[2020-07-07]{7. Juli 2020}
+\institute{Universität Osnabrück}
+
+\begin{document}
+    \begin{frame}
+        \titlepage
+    \end{frame}
+
+    \begin{frame}{Überblick}
+        \tableofcontents
+    \end{frame}
+
+    \section{Reelle Algebren}
+    \begin{frame}
+        \begin{block}{Anmerkung}
+            In dieser Präsentation stehen kleine griechische Buchstaben stets für reelle Zahlen; lateinische Buchstaben stehen für Elemente der momentan betrachteten Algebra.
+        \end{block}
+    \end{frame}
+
+    \begin{frame}
+        \begin{definition}
+            Ein Vektorraum \(V\) über \R mit einer Produktabbildung
+            \[
+                V \times V \to V, (x, y) \mapsto xy
+            \] 
+            heißt \textbf{Algebra} über \R (oder reelle Algebra), wenn die beiden Distributivgesetze
+            \begin{gather*}
+                (\alpha x + \beta y) z = \alpha \cdot xz + \beta \cdot yz, \\
+                x (\alpha y + \beta z) = \alpha \cdot xy + \beta \cdot xz
+            \end{gather*}
+            für alle \(\alpha, \beta \in \R\) und \(x, y, z \in V\) erfüllt sind.
+        \end{definition}
+    \end{frame}
+
+    \begin{frame}
+        \begin{definition}
+            Eine Algebra heißt \dots
+            \begin{itemize}
+                \item
+                    \dots{} \textit{assoziativ}, wenn \(x(yz) = (xy)z\) für alle \(x, y, z \in V\) gilt.
+                \item
+                    \dots{} \textit{kommutativ}, wenn \(xy = xy\) für alle \(x, y \in V\) gilt.
+                \item
+                    \dots{} \textit{mit Einselement}, wenn es ein Element \(e \in V\) mit \(ex = xe = x\) für alle \(x \in V\) gibt.
+            \end{itemize}
+        \end{definition}
+    \end{frame}
+
+    \begin{frame}
+        \begin{definition}
+            Ein Element \(x\) einer Algebra \(\mathcal{A}\) heißt \textit{Nullteiler}, falls es ein Element \(0 \neq y \in \mathcal{A}\) mit \(xy = 0\) oder \(yx = 0\) gibt.
+
+            Konsequenterweise heißt eine Algebra \textit{nullteilerfrei}, falls sie keine Nullteiler \(\neq 0\) besitzt.
+        \end{definition}
+    \end{frame}
+
+    \section{Historisches}
+
+    \section{Die Quaternionenalgebra \(\mathbb{H}\)}
+    \section{Der Imaginärraum von \(\mathbb{H}\)}
+    \subsection{Bezug zu klassischen Vektorprodukten}
+    \section{Zentrum von \(\mathbb{H}\)}
+    \section{Endomorphismen von \(\mathbb{H}\)}
+    \section{Fundamentalsatz der Algebra für Quaternionen}
+\end{document}
