@@ -5,6 +5,7 @@
 %=======================
 
 \usepackage{amsmath, amsthm, amssymb}   % Math symbols, environments etc.
+\usepackage{mathtools}
 \usepackage{fontspec}                   % For Unicode fonts
 \usepackage{unicode-math}               % For Unicode math fonts
 \usepackage{microtype}                  % Nicer interword spacing
@@ -58,7 +59,9 @@
 \newcommand{\Ham}{\ensuremath{\mathbb{H}}{ }}
 \newcommand{\R}{\ensuremath{\mathbb{R}}{ }}
 
-\newtheorem{lem}{Lemma}
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\newtheorem{cor}{Korollar}
 
 %=======================
 %  DOCUMENT INFORMATION
@@ -267,6 +270,100 @@
     \end{frame}
 
     \section{Die Quaternionenalgebra \(\mathbb{H}\)}
+
+    \begin{frame}
+        Hamilton definiert die \emph{Quaternionen-Algebra} \(\Ham\) durch die Festlegung der Produkte der Basiselemente
+        \[
+            e_1 := (1,0,0,0), \, e_2 := (0,1,0,0), \, e_3 := (0,0,1,0), \, e_4 := (0,0,0,1):
+        \] 
+        \centering
+        \begin{tabular}{crrr}
+                    & \(e_2\) & \(e_3\) & \(e_4\) \\ \midrule
+            \(e_2\) & \(- e_1\) & \(e_4\) & \(- e_3\) \\
+            \(e_3\) & \(- e_4\) & \(- e_1\) & \(e_2\) \\
+            \(e_4\) & \(e_3\) & \(- e_2\) & \(-e _1\)
+        \end{tabular}
+
+        \small (Es sei \(e_1\) das Einselement.)
+
+        \raggedright
+        \normalsize
+        Man sieht direkt, dass \(\Ham\) nicht kommutativ ist.
+        Die Assoziativität lässt sich wie im Einführungsabschnitt besprochen überprüfen.
+    \end{frame}
+
+    \begin{frame}
+        Neben dieser klassischen Konstruktion von \(\Ham\) gibt es noch einen eleganteren Weg, der uns viele Eigenschaften der Quaternionen-Algebra direkter liefert:
+
+        \begin{theorem}
+            Die Menge \(\mathcal{H} := \left\{ \begin{pmatrix} w & -z \\ \bar{z} & \bar{w} \end{pmatrix} \colon w, z \in \mathbb{C} \right\}\) ist eine \(\mathbb{R}\)-Unteralgebra von \(\text{\em Mat}(2, \mathbb{C})\) mit Einselement \(E_2\).
+            \(\mathcal{H}\) ist eine vierdimensionale, assoziative Divisionsalgebra.
+        \end{theorem}
+    \end{frame}
+
+    \begin{frame}
+        \begin{proof}
+            \only<1>{
+            Man verifiziert durch Nachrechnen, dass \(\mathcal{H}\) ein vierdimensionaler \(\mathbb{R}\)-UVR von \(\text{Mat}(2, \mathbb{C})\) ist.
+            Auch die Abgeschlossenheit bezüglich der Matrizenmultiplikation überprüft man auf diese Weise.
+
+            Die Assoziativität ist klar, da \(\text{Mat}(2, \mathbb{C})\) assoziativ ist.
+            }
+            \only<2>{
+            Um einzusehen, dass \(\mathcal{H}\) auch eine Divisionsalgebra ist, benutzen wir das eingangs bewiesene Nullteilerkriterium:\\
+            Seien also \(A, B \in \mathcal{H}\) mit \(AB = 0\).
+            Wegen des Determinantenmultiplikationsatzes gilt \(\det(A) \cdot \det(B) = 0\), also \(\det(A) = 0\) oder \(\det(B) = 0\).
+            Aus
+            \[
+                \det \begin{pmatrix} w & -z \\ \bar{z} & \bar{w} \end{pmatrix} = \abs{w}^2 + \abs{z}^2 = 0 \iff w = z = 0
+            \]
+            folgt
+            \[
+                AB = 0 \iff A = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \text{ oder } B = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}
+            .\] 
+            Das bedeutet, dass \(\mathcal{H}\) keine Nullteiler \(\neq 0\) besitzt.
+            Damit ist \(\mathcal{H}\) eine Divisionsalgebra.
+            }
+            \alt<2>{\qedhere}{\phantom\qedhere}
+        \end{proof}
+    \end{frame}
+
+    \begin{frame}
+        \begin{lemma}
+            Die Abbildung
+            \[
+                F \colon \Ham \to \mathcal{H}, \quad (\alpha, \beta, \gamma, \delta) \mapsto
+                    \begin{pmatrix}
+                        \alpha + \beta i  & - \gamma - \delta i \\
+                        \gamma - \delta i & \alpha - \beta i
+                    \end{pmatrix}
+            ,\]
+            ist ein \(\mathbb{R}\)-Algebra-Isomorphismus und es gilt:
+            \begin{align*}
+                F(e_1) = E_2 =: E,& \quad
+                F(e_2) = \begin{pmatrix} i & 0 \\ 0 & -i \end{pmatrix} =: I, \\
+                F(e_3) = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} =: J,& \quad
+                F(e_4) = \begin{pmatrix} 0 & -i \\ -i & 0 \end{pmatrix} =: K.
+            \end{align*}
+        \end{lemma}
+    \end{frame}
+
+    \begin{frame}
+        \begin{cor}
+            Die Hamiltonsche Algebra \Ham ist eine assoziative Divisionsalgebra.
+        \end{cor}
+
+        \uncover<2>{
+        \begin{proof}
+            Wir haben gezeigt, dass \(\mathcal{H}\) eine assoziative Divisionsalgebra ist.
+
+            Durch den oben beschriebenen Isomorphismus \(F\) ist also auch \Ham eine assoziative Divisionsalgebra.
+        \end{proof}
+
+        \vfill
+        Man muss also \enquote{nur} mit komplexen Matrizen rechnen können, um den Umgang mit der Quaternionen-Algebra zu beherrschen.
+        }
+    \end{frame}
 
     \section{Der Imaginärraum von \(\mathbb{H}\)}
     \subsection{Bezug zu klassischen Vektorprodukten}
