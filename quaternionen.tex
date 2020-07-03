@@ -167,17 +167,162 @@
         Denn sind \(x = \sum_{u=1}^{n} \alpha_u e_u\) und  \(y = \sum_{v=1}^{n} \beta_v e_v\) beliebige Elemente in V, so gilt wegen der Distributivgesetze
         \[
             xy = \sum_{u,v=1}^{n} (\alpha_u \beta_v) e_u e_v
-        .\] 
+        .\]
         Assoziativität und Kommutativität lassen sich dann einfach anhand der Basisprodukte überprüfen.
     \end{frame}
 
 
     \section{Historisches}
 
+    \begin{frame}
+        \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{description}
+                \item[1805] Geboren in Dublin
+
+                \item[1827] Berufung zum Professor der Astronomie
+
+                \item[1835] Ritterschlag
+
+                \item[1837--1845] Präsident der Royal Irish Academy
+
+                \item[1843] Erfindung der Quaternionen
+
+                \item[1865] Gestorben in Dunsink
+            \end{description}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \includegraphics[width=0.8\textwidth]{hamilton_portrait.jpg}
+                \caption{Sir William Rowan \textsc{Hamilton} \cite{hamilton_portrait}}
+            \end{figure}
+        \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \begin{columns}
+        \begin{column}{0.5\textwidth}
+            \begin{itemize}
+                \item
+                    Hamilton beschäftigt sich 1835 mit der geometrischen Bedeutung der \emph{komplexen Zahlen} im \(\R^2\)
+
+                \item
+                    Er fragt sich:
+                    \enquote{Gibt es eine ähnliche Interpretation im \(\R^3\)?}
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5\textwidth}
+            \begin{figure}
+                \includesvg[width=\textwidth]{komplexe_multiplikation}
+                \caption{Geometrische Interpretation der komplexen Multiplikation \cite{komplexe_multiplikation}}
+            \end{figure}
+        \end{column}
+        \end{columns}
+    \end{frame}
+
+    \begin{frame}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+        \begin{itemize}
+            \item<1->
+                Hamilton sucht eine Multiplikation, die die bisherigen Regeln und Beziehungen weiterhin erfüllt.
+
+            \item<2->
+                Erster Ansatz: \(x = \alpha + \beta i + \gamma j\) mit \(i^2 = j^2 = -1\).
+
+            \item<3->
+                Er stellt fest, dass für die Gültigkeit der Produktregel \(ij + ji = 0\) gelten muss.
+                Unter Erhaltung der Kommutativität hieße dies: \(2ij = 0 \implies ij = 0\), was ihm aber nicht gefällt.
+        \end{itemize}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+        \begin{beamercolorbox}[wd=\textwidth, rounded=true, shadow=true]{quote}
+            \enquote{Well, Papa, can you multiply triplets?}
+
+            \enquote{No, I can only add and subtract them.}
+
+            \vspace{2mm}
+            \hfill {\scriptsize--- Gespräch zwischen Hamilton und seinem Sohn}
+        \end{beamercolorbox}
+
+        \begin{itemize}
+            \item<4->
+                Stattdessen gibt Hamilton lieber die Kommutativität auf, was \(ji = -ij \neq 0\) erlaubt.
+
+            \item<5->
+                Die entscheidende Idee kommt ihm 1843:\\
+                Er setzt \(ij := k, ji = -k\) und nimmt  \(k\) als linear unabhängig von \(i\) und \(j\) an.
+        \end{itemize}
+        \vfill
+    \end{column}
+    \end{columns}
+    \end{frame}
+
+    \begin{frame}
+        \begin{figure}
+            \includegraphics[width=0.7\textwidth]{broome_bridge.jpg}
+            \caption{Gedenktafel an der \textit{Broome Bridge} in Dublin \cite{broome_bridge}}
+        \end{figure}
+    \end{frame}
+
     \section{Die Quaternionenalgebra \(\mathbb{H}\)}
+
     \section{Der Imaginärraum von \(\mathbb{H}\)}
     \subsection{Bezug zu klassischen Vektorprodukten}
+
     \section{Zentrum von \(\mathbb{H}\)}
+    \begin{frame}
+        \begin{theorem}
+            Für die Algebra \Ham gilt:
+            \[
+                Z \left( \Ham \right) = \R e = \left\{ x \in \Ham \colon xu = ux \,\text{ für alle }\, u \in \Im \left( \Ham \right) \right\}
+            .\]
+        \end{theorem}
+    \end{frame}
+
+    \begin{frame}
+        \begin{proof}
+            \only<1>{
+            Es ist klar, dass \(\R e \subseteq Z \left( \Ham \right) \); denn  \(e\) ist neutrales Element, also per Definition mit allen Elementen aus \(\Ham\) kommutativ.
+            Die Skalare sind natürlich ebenfalls kommutativ zueinander.
+            }
+            \only<2>{
+            Zur Umkehrung.\\
+            Sei \(x = \alpha e + \beta i + \gamma j + \delta k \in Z \left( \Ham \right)\), das heißt, \(x\) kommutiert mit allen Elementen aus \(\Ham\).
+            Insbesondere kommutiert \(x\) mit den Basiselementen \(i, \, j \in \Ham\), es muss also \(ix = xi\) und \(jx = xj\) gelten.
+
+            Wir wollen zeigen, dass dann bereits \(x \in \R e\) ist.
+            }
+            \only<3>{
+            Ausmultiplizieren der ersten Gleichung ergibt
+            \begin{alignat*}{3}
+                     &&xi &= ix \\
+                \iff &&\alpha i - \beta + \gamma k - \delta j &= \alpha i - \beta - \gamma k + \delta j \\
+                \iff &&\gamma k - \delta j &= - \gamma k + \delta j \\
+                \iff &&\gamma k - \delta j &= - (\gamma k - \delta j) \\
+                \iff &&2 \gamma k - 2 \delta j &= 0 \\
+                \iff &&\gamma = \delta &= 0.
+            \end{alignat*}
+            }
+            \only<4>{
+            Analog ergibt sich aus der zweiten Gleichung \(\beta = \delta = 0\).
+            Damit ist \(\beta = \gamma = \delta = 0\).
+            \(x\)~ist demnach von der Form \(x = \alpha e\), also \(x \in \R e\).
+            Das bedeutet \(Z \left( \Ham \right) \subseteq \R e\), und damit folgt aus dem ersten Teil wie gewünscht
+            \[
+                Z \left( \Ham \right) = \R e
+            .\]
+            }
+            \alt<4>{\qedhere}{\phantom\qedhere}
+        \end{proof}
+    \end{frame}
+
     \section{Endomorphismen von \(\mathbb{H}\)}
+
     \section{Fundamentalsatz der Algebra für Quaternionen}
+
+    \begin{frame}
+        \printbibliography
+    \end{frame}
 \end{document}
