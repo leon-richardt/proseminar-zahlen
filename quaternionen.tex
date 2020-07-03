@@ -38,6 +38,7 @@
 
 \setmathfont{TeX Gyre Pagella Math}
 \setmonofont[Scale=0.9]{Fira Mono}
+\setmathfont[range=\setminus]{Asana Math}
 
 \newfontfamily{\mathroman}{TeX Gyre Pagella}[Scale=MatchUppercase]
 
@@ -74,6 +75,9 @@
 \institute{Universität Osnabrück}
 
 \begin{document}
+
+    \nocite{ebbinghaus_zahlen_1992}
+
     \begin{frame}
         \titlepage
     \end{frame}
@@ -366,7 +370,41 @@
     \end{frame}
 
     \section{Der Imaginärraum von \(\mathbb{H}\)}
-    \subsection{Bezug zu klassischen Vektorprodukten}
+    \begin{frame}
+        \begin{definition}
+            Der Untervektorraum
+            \[
+                \Im(\Ham) := \R i + \R j + \R k
+            \]
+            heißt \emph{Imaginärraum}.
+            Seine Elemente werden auch als vektorielle Quaternionen bezeichnet.
+
+            Äquivalent zu dieser (basisabhängigen) Darstellung ist die Form
+            \[
+                \Im(\Ham) = \left\{ x \in \Ham \colon x^2 \in \R e \text{ und } x \notin \R e \setminus \left\{ 0 \right\} \right\}
+            .\] 
+        \end{definition}
+
+        \uncover<2>{
+        Wegen \(x^2 \in \R e \nsubseteq \Im(\Ham)\) ist \(\Im(\Ham)\) keine \(\R\)-Unteralgebra von \(\Ham\).
+
+        Aus dieser Darstellung folgert man, dass es zu jedem \(u \in \Im(\Ham), \, u \neq 0,\) einen Skalar \(\varrho\) mit \((\varrho u)^2 = - e\) gibt.
+        (Man kann also normieren.)
+        }
+    \end{frame}
+
+    \begin{frame}
+        Seien \(u = \beta i + \gamma j + \delta k, \, v = \varrho i + \sigma j + \tau k\).
+        Durch Ausmultiplizieren ergibt sich
+        \[
+            uv = - (\beta \varrho + \gamma \sigma + \delta \tau) e + (\gamma \tau - \delta \sigma) i + (\delta \varrho - \beta \tau) j + (\beta \sigma - \gamma \varrho) k
+        .\]
+        Dies kann man auch schreiben als
+        \[
+            uv = - \langle u, v \rangle e + u \times v
+        ,\] 
+        und gewinnt so auf natürliche Weise Skalar- und Kreuzprodukt aus der Quaternionenmultiplikation.
+    \end{frame}
 
     \section{Zentrum von \(\mathbb{H}\)}
     \begin{frame}
@@ -415,6 +453,8 @@
         \end{proof}
     \end{frame}
 
+
+    % Diese Sektion auslassen?
     \section{Endomorphismen von \(\mathbb{H}\)}
 
     \section{Fundamentalsatz der Algebra für Quaternionen}
