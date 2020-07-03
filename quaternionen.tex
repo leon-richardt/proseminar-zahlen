@@ -10,15 +10,15 @@
 \usepackage{microtype}                  % Nicer interword spacing
 \usepackage{polyglossia}                % Provides locale-specific formatting
 \usepackage{csquotes}
-\usepackage{caption}                    % Provides captions outside of floats
 \usepackage{svg}                        % For including SVG files
 \usepackage{booktabs}                   % Nicer tables
 \usepackage{tabularx}                   % Allows for linebreaks in tables
 
 \usepackage[
-    backend = biber,
-    style = ieee-alphabetic
+    backend = biber
 ]{biblatex}
+
+\addbibresource{quaternionen.bib}
 
 % Set beamer theme
 \usetheme{metropolis}
@@ -29,12 +29,16 @@
     subsectionpage = simple
 }
 
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+
 \usecolortheme{rose}
 
-\setmathfont{TeX Gyre Pagella Math}
+\setbeamercolor{quote}{fg=black!80!white, bg=blue!10!white}
 
-% Captions
-\captionsetup{justification=centering}
+\setmathfont{TeX Gyre Pagella Math}
+\setmonofont[Scale=0.9]{Fira Mono}
+
+\newfontfamily{\mathroman}{TeX Gyre Pagella}[Scale=MatchUppercase]
 
 % Language Setup
 \setdefaultlanguage[spelling=new, babelshorthands=true]{german}
@@ -51,7 +55,7 @@
 %=======================
 %    CUSTOM COMMANDS
 %=======================
-\newcommand{\Ham}{\ensuremath{\mathbb{H}}}
+\newcommand{\Ham}{\ensuremath{\mathbb{H}}{ }}
 \newcommand{\R}{\ensuremath{\mathbb{R}}{ }}
 
 \newtheorem{lem}{Lemma}
@@ -87,7 +91,7 @@
             Ein Vektorraum \(V\) über \R mit einer Produktabbildung
             \[
                 V \times V \to V, (x, y) \mapsto xy
-            \] 
+            \]
             heißt \textbf{Algebra} über \R (oder reelle Algebra), wenn die beiden Distributivgesetze
             \begin{gather*}
                 (\alpha x + \beta y) z = \alpha \cdot xz + \beta \cdot yz, \\
