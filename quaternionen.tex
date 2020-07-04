@@ -406,6 +406,32 @@
         und gewinnt so auf natürliche Weise Skalar- und Kreuzprodukt aus der Quaternionenmultiplikation.
     \end{frame}
 
+    \begin{frame}
+        Für \(u, v, w \in \Im(\Ham)\) bestätigt man durch einfaches Nachrechnen:
+        \begin{itemize}
+            \item
+                \(u \times v = \frac{1}{2} (uv - vu)\)
+
+            \item
+                \(\langle v, u \rangle e = - \frac{1}{2} (uv + vu)\)
+
+            \item
+                \(u \times (v \times w) = \frac{1}{2} (uvw - vwu)\)
+
+            \item
+                \(\langle u, v \rangle^2 + \abs{u \times v}^2 = \abs{u}^2 \abs{v}^2\)
+
+            \item
+                \(\langle u \times v, w \rangle = \langle u, v \times w \rangle\) \hfill (Vertauschungsregel)
+
+            \item
+                \(u \times (v \times w) = \langle u, w \rangle v - \langle u, v \rangle w\) \hfill (\textsc{Grassmann}-Identität)
+
+            \item
+                \(u \times (v \times w) + v \times (w \times u) + w \times (u \times v) = 0\) \hfill (\textsc{Jacobi}-Identität)
+        \end{itemize}
+    \end{frame}
+
     \section{Zentrum von \(\mathbb{H}\)}
     \begin{frame}
         \begin{theorem}
