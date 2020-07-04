@@ -61,6 +61,7 @@
 \newcommand{\R}{\ensuremath{\mathbb{R}}{ }}
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+\DeclareMathOperator{\End}{End}
 
 \newtheorem{cor}{Korollar}
 
@@ -434,6 +435,21 @@
 
     \section{Zentrum von \(\mathbb{H}\)}
     \begin{frame}
+        \begin{definition}
+            Für eine Algebra \(\mathcal{A}\) heißt
+            \[
+                Z(\mathcal{A}) := \left\{ z \in \mathcal{A} \colon zx = xz \text{ für alle } x \in \mathcal{A} \right\}
+            \] 
+            \emph{Zentrum} von \(\mathcal{A}\).
+            Es handelt sich also um diejenigen Elemente in \(\mathcal{A}\), die mit allen Elementen kommutieren.
+
+            Ist \(\mathcal{A}\) assoziativ, so ist \(Z(\mathcal{A})\) eine Unteralgebra von \(\mathcal{A}\).
+            Falls \(\mathcal{A}\) kommutativ ist, so ist \(Z(\mathcal{A}) = \mathcal{A}\).
+            Ist \(\mathcal{A}\) eine Algebra mit Einselement, so ist trivialerweise \(\R e \subseteq Z(\mathcal{A})\).
+        \end{definition}
+    \end{frame}
+
+    \begin{frame}
         \begin{theorem}
             Für die Algebra \Ham gilt:
             \[
@@ -479,13 +495,89 @@
         \end{proof}
     \end{frame}
 
-
     % Diese Sektion auslassen?
     \section{Endomorphismen von \(\mathbb{H}\)}
+    \begin{frame}
+        Es sei \(\End(\Ham)\) der \(\R\)-Vektorraum aller Endomorphismen von \(\Ham\).
+
+        \begin{theorem}
+            Ist \(a_1, \dots, a_4\) eine Basis von \(\Ham\), so ist die Abbildung
+            \[
+                F \colon \Ham^4 \to \End(\Ham), \quad \left( b_1, b_2, b_3, b_4 \right) \mapsto f \in \End(\Ham) \text{ mit } f(x) := \sum_{i=1}^4 a_i x b_i
+            \] 
+            \(\R\)-linear und bijektiv.
+
+            Es lässt sich (bei fixierter Basis) also jeder Endomorphismus von \Ham eindeutig durch ein Tupel \(\left(b_1, \dots, b_4\right)\) identifizieren.
+        \end{theorem}
+    \end{frame}
+
+    \begin{frame}
+        \begin{proof}
+            \only<1>{
+            Die \(\R\)-Linearität sieht man schnell ein.
+
+            Da \(\dim\left(\Ham^4\right) = \dim\left(\End\left(\Ham\right)\right) = 16 < \infty\), braucht man nur die Injektivität zeigen.
+            Dann folgt aus der Dimensionsformel die Surjektivität und damit auch die Bijektivität.
+            Für den Beweis der Injektivität benutzen wir das Kernkriterium.
+
+            Dazu zeigen wir die Hilfsaussage:
+            \begin{center}
+                Sei \(n = 1, 2, 3, 4\), sei \(f_n(x) = \sum_{i=1}^n a_ixb_i = 0\) für alle \(x \in \Ham\).\\
+                Dann gilt \(b_1 = \dots = b_n = 0\).
+            \end{center}
+            }
+            \only<2>{
+                Wir gehen induktiv vor, der Fall \(n = 1\) ist klar.
+                Sei also \(n > 1\).
+                In der Absicht, einen Widerspruch zu erhalten, nehmen wir \(b_1 \neq 0\) an:
+                \[
+                    a_1 x + \sum_{i=2}^n a_i x q_i = 0 \quad \text{ mit } q_i := b_i b_1^{-1}
+                .\] 
+                Da \(f_n(x) = 0\) für alle \(x \in \Ham\), gilt:
+                \begin{alignat*}{3}
+                    &&f(x) y = 0 &= f(xy) \\
+                    \iff &&a_1 x y + \sum_{i=2}^n a_i x q_i y &= a_1 x y + \sum_{i=2}^n a_i x y q_i \\
+                    \iff &&\sum_{i=2}^n a_i x (q_i y) - \sum_{i=2}^n a_i x (y q_i) &= 0 \\
+                    \iff &&\sum_{i=2}^n a_i x (q_i y - y q_i) &= 0
+                \end{alignat*}
+            }
+            \only<3>{
+                Da die \(a_i\) Basiselemente sind, ist \(a_i \neq 0\) für alle \(i = 1, \dots, 4\).
+                Deswegen muss
+                \[
+                q_i y - y q_i = 0 \iff q_i y = y q_i
+                \] 
+                für alle \(y \in \Ham\) gelten.
+
+                Damit ist \(q_i \in Z(\Ham) = \R e\) nach dem vorherigen Abschnitt, also
+                \[
+                    q_i = \alpha_i e \quad \text{ mit } \quad \alpha_i \in \R
+                .\] 
+            }
+            \only<4>{
+                Einsetzen in die Ausgangsgleichung ergibt
+                \begin{alignat*}{3}
+                    &&a_1 x + \sum_{i=2}^n a_i x q_i &= 0 \\
+                    \iff &&a_1 x + \sum_{i=2}^n \alpha_i a_i x &= 0 \\
+                    \iff &&\left( a_1 + \sum_{i=2}^n \alpha_i a_i \right) x &= 0 \\
+                    \iff &&a_1 + \sum_{i=2}^n \alpha_i a_i &= 0.
+                \end{alignat*}
+            }
+            \only<5>{
+                Dann wären die \(a_1, \dots, a_4\) linear abhängig, was aber aufgrund der Basiseigenschaft ein Widerspruch ist.
+
+                Also muss doch \(b_1 = 0\).
+                Analog erhält man \(b_2 = b_3 = b_4 = 0\).
+
+                Damit ist der Kern von \(F\) trivial; also ist \(F\) injektiv und nach der Dimensionsformel auch bijektiv.
+            }
+            \alt<5>{\qedhere}{\phantom\qedhere}
+        \end{proof}
+    \end{frame}
 
     \section{Fundamentalsatz der Algebra für Quaternionen}
 
-    \begin{frame}
+    \begin{frame}[allowframebreaks]
         \printbibliography
     \end{frame}
 \end{document}
