@@ -59,9 +59,18 @@
 %=======================
 \newcommand{\Ham}{\ensuremath{\mathbb{H}}{ }}
 \newcommand{\R}{\ensuremath{\mathbb{R}}{ }}
+\newcommand{\diff}[2]{\ensuremath{\frac{\partial #1}{\partial #2}}}
+\newcommand{\lap}[2]{\ensuremath{\frac{\partial^2 #1}{\partial #2^2}}}
+\newcommand{\half}{\frac{1}{2}}
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
+
+\DeclareMathOperator{\kernel}{kern}
+\DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\newdiv}{div}
+\DeclareMathOperator{\rot}{rot}
 
 \newtheorem{cor}{Korollar}
 
@@ -158,7 +167,7 @@
             ii) \(\implies\) i): \\
             Sei \(a \in \mathcal{A} \setminus \{0\}\).
             Die Abbildung \(\varphi \colon \mathcal{A} \to \mathcal{A},\, x \mapsto ax\) ist ein VR-Endomorphismus.
-            Wegen der Nullteilerfreiheit ist \(\text{kern}(\varphi) = \{0\}\), was aufgrund des Kernkriteriums die Injektivität bedeutet.
+            Wegen der Nullteilerfreiheit ist \(\kernel(\varphi) = \left\{ 0 \right\}\), was aufgrund des Kernkriteriums die Injektivität bedeutet.
             Da weiterhin \(\dim(\mathcal{A}) < \infty\), folgt aus der Dimensionsformel die Bijektivität.
             Damit ist jede Gleichung der Form \(ax = b\) eindeutig lösbar.
 
@@ -172,7 +181,7 @@
         e_u e_v,\, 1 \leq u, v \leq n,
         \]
         eine Algebra eindeutig bestimmen.
-        Denn sind \(x = \sum_{u=1}^{n} \alpha_u e_u\) und  \(y = \sum_{v=1}^{n} \beta_v e_v\) beliebige Elemente in V, so gilt wegen der Distributivgesetze
+        Denn sind \(x = \sum_{u=1}^{n} \alpha_u e_u\) und  \(y = \sum_{v=1}^{n} \beta_v e_v\) beliebige Elemente in \(V\), so gilt wegen der Distributivgesetze
         \[
             xy = \sum_{u,v=1}^{n} (\alpha_u \beta_v) e_u e_v
         .\]
@@ -256,7 +265,7 @@
 
         \begin{itemize}
             \item<4->
-                Stattdessen gibt Hamilton lieber die Kommutativität auf, was \(ji = -ij \neq 0\) erlaubt.
+                Stattdessen gibt Hamilton lieber die Kommutativität auf, was \(ji = -ij\) erlaubt.
 
             \item<5->
                 Die entscheidende Idee kommt ihm 1843:\\
@@ -301,7 +310,12 @@
         Neben dieser klassischen Konstruktion von \(\Ham\) gibt es noch einen eleganteren Weg, der uns viele Eigenschaften der Quaternionen-Algebra direkter liefert:
 
         \begin{theorem}
-            Die Menge \(\mathcal{H} := \left\{ \begin{pmatrix} w & -z \\ \bar{z} & \bar{w} \end{pmatrix} \colon w, z \in \mathbb{C} \right\}\) ist eine \(\mathbb{R}\)-Unteralgebra von \(\text{\em Mat}(2, \mathbb{C})\) mit Einselement \(E_2\).
+            Die Menge 
+            \[
+                \mathcal{H} := \left\{ \begin{pmatrix} w & -z \\ \bar{z} & \bar{w} \end{pmatrix} 
+                                        \colon w, z \in \mathbb{C} \right\}
+            \] ist eine \(\mathbb{R}\)-Unteralgebra von \(\Mat(2, \mathbb{C})\) mit Einselement \(E_2\).
+
             \(\mathcal{H}\) ist eine vierdimensionale, assoziative Divisionsalgebra.
         \end{theorem}
     \end{frame}
@@ -309,10 +323,10 @@
     \begin{frame}
         \begin{proof}
             \only<1>{
-            Man verifiziert durch Nachrechnen, dass \(\mathcal{H}\) ein vierdimensionaler \(\mathbb{R}\)-UVR von \(\text{Mat}(2, \mathbb{C})\) ist.
+            Man verifiziert durch Nachrechnen, dass \(\mathcal{H}\) ein vierdimensionaler \(\mathbb{R}\)-UVR von \(\Mat(2, \mathbb{C})\) ist.
             Auch die Abgeschlossenheit bezüglich der Matrizenmultiplikation überprüft man auf diese Weise.
 
-            Die Assoziativität ist klar, da \(\text{Mat}(2, \mathbb{C})\) assoziativ ist.
+            Die Assoziativität ist klar, da \(\Mat(2, \mathbb{C})\) assoziativ ist.
             }
             \only<2>{
             Um einzusehen, dass \(\mathcal{H}\) auch eine Divisionsalgebra ist, benutzen wir das eingangs bewiesene Nullteilerkriterium:\\
@@ -387,15 +401,35 @@
         \end{definition}
 
         \uncover<2>{
-        Wegen \(x^2 \in \R e \nsubseteq \Im(\Ham)\) ist \(\Im(\Ham)\) keine \(\R\)-Unteralgebra von \(\Ham\).
-
         Aus dieser Darstellung folgert man, dass es zu jedem \(u \in \Im(\Ham), \, u \neq 0,\) einen Skalar \(\varrho\) mit \((\varrho u)^2 = - e\) gibt.
         (Man kann also normieren.)
+
+        Wegen \(x^2 \in \R e \nsubseteq \Im(\Ham)\) ist \(\Im(\Ham)\) keine \(\R\)-Unteralgebra von \(\Ham\).
         }
     \end{frame}
 
     \begin{frame}
-        Seien \(u = \beta i + \gamma j + \delta k, \, v = \varrho i + \sigma j + \tau k\).
+        Jedes Quaternion \(x \in \Ham\) besitzt also eine eindeutige Darstellung
+        \[
+            x = \alpha e + u \quad \text { mit } \quad \alpha \in \R \text{ und } u \in \Im(\Ham)
+        .\]
+        Man nennt
+        \begin{itemize}
+            \item 
+                \(\alpha e\) \emph{skalaren Anteil} oder \emph{Realteil}, und 
+
+            \item
+                \(u\) \emph{vektoriellen Anteil} oder \emph{Imaginärteil}
+        \end{itemize}
+        von \(x\).
+
+    \end{frame}
+
+    \begin{frame}
+        Seien
+        \[
+            u = \beta i + \gamma j + \delta k, \quad v = \varrho i + \sigma j + \tau k \in \Im(\Ham) \cong \R^3
+        .\]
         Durch Ausmultiplizieren ergibt sich
         \[
             uv = - (\beta \varrho + \gamma \sigma + \delta \tau) e + (\gamma \tau - \delta \sigma) i + (\delta \varrho - \beta \tau) j + (\beta \sigma - \gamma \varrho) k
@@ -438,7 +472,7 @@
         \begin{definition}
             Für eine Algebra \(\mathcal{A}\) heißt
             \[
-                Z(\mathcal{A}) := \left\{ z \in \mathcal{A} \colon zx = xz \text{ für alle } x \in \mathcal{A} \right\}
+                Z \left( \mathcal{A} \right) := \left\{ z \in \mathcal{A} \colon zx = xz \text{ für alle } x \in \mathcal{A} \right\}
             \] 
             \emph{Zentrum} von \(\mathcal{A}\).
             Es handelt sich also um diejenigen Elemente in \(\mathcal{A}\), die mit allen Elementen kommutieren.
@@ -451,10 +485,7 @@
 
     \begin{frame}
         \begin{theorem}
-            Für die Algebra \Ham gilt:
-            \[
-                Z \left( \Ham \right) = \R e = \left\{ x \in \Ham \colon xu = ux \,\text{ für alle }\, u \in \Im \left( \Ham \right) \right\}
-            .\]
+            Für die Algebra \Ham gilt \(Z \left( \Ham \right) = \R e\).
         \end{theorem}
     \end{frame}
 
@@ -486,7 +517,7 @@
             Analog ergibt sich aus der zweiten Gleichung \(\beta = \delta = 0\).
             Damit ist \(\beta = \gamma = \delta = 0\).
             \(x\)~ist demnach von der Form \(x = \alpha e\), also \(x \in \R e\).
-            Das bedeutet \(Z \left( \Ham \right) \subseteq \R e\), und damit folgt aus dem ersten Teil wie gewünscht
+            Das bedeutet \(Z \left( \Ham \right) \subseteq \R e\), und damit folgt zusammen mit dem ersten Teil wie gewünscht
             \[
                 Z \left( \Ham \right) = \R e
             .\]
@@ -535,7 +566,7 @@
                 .\] 
                 Da \(f_n(x) = 0\) für alle \(x \in \Ham\), gilt:
                 \begin{alignat*}{3}
-                    &&f(x) y = 0 &= f(xy) \\
+                    &&f_n(x) y = 0 &= f_n(xy) \\
                     \iff &&a_1 x y + \sum_{i=2}^n a_i x q_i y &= a_1 x y + \sum_{i=2}^n a_i x y q_i \\
                     \iff &&\sum_{i=2}^n a_i x (q_i y) - \sum_{i=2}^n a_i x (y q_i) &= 0 \\
                     \iff &&\sum_{i=2}^n a_i x (q_i y - y q_i) &= 0
@@ -575,9 +606,97 @@
         \end{proof}
     \end{frame}
 
+    \begin{frame}
+        Wir geben ein Beispiel für einen Endomorphismus.
+        Die \emph{Konjugierung}
+        \[
+            \Ham \to \Ham, \quad
+            x = \alpha e + \beta i + \gamma j + \delta k \mapsto \bar{x} = \alpha e - \beta i - \gamma j - \delta k
+        \]
+        wird bezüglich der Standardbasis \(e, i, j, k\) beschrieben durch
+        \begin{align*}
+            \bar{x} &= - \half \left( x + ixi + jxj + kxk \right) \\
+                    &= - \half exe - \half ixi - \half jxj - \half kxk \\
+                    &= F \left( - \half e, \, - \half i, \, - \half j, \, - \half k \right),
+        \end{align*}
+        und dies ist offensichtlich von der Form des vorherigen Satzes.
+    \end{frame}
+
+    \section{Bezug zur Vektoranalysis}
+
+    \begin{frame}
+        Mithilfe der Quaternionenmultiplikation lassen sich einige bekannte Operatoren der Vektoranalysis elegant herleiten.
+
+        \begin{definition}
+            Der \textit{Nabla-Operator} wird definiert durch
+            \[
+                \nabla := \diff{}{x} i + \diff{}{y} j + \diff{}{z} k
+            .\]
+        \end{definition}
+    \end{frame}
+
+    \begin{frame}
+        Sei \(f \colon \R^3 \to \R\) eine differenzierbare Funktion.
+        Die Anwendung des Nabla-Operators liefert
+        \[
+            \nabla f = \diff{f}{x} i + \diff{f}{y} j + \diff{f}{z} k = \grad \left( f \right)
+        .\]
+
+        Zweimalige Anwendung von \(\nabla\) liefert den Laplace-Operator \(\Delta\):
+        \[
+            \nabla^2 f = - \left( \lap{f}{x} + \lap{f}{y} + \lap{f}{z} \right) = - \Delta f 
+        .\]
+    \end{frame}
+
+    \begin{frame}
+        Sei
+        \[
+            F \colon \R^3 \to \Im \left( \Ham \right),
+            (x,y,z) \mapsto u(x,y,z) i + v(x,y,z) j + w(x,y,z) k
+        .\]
+        Anwendung von \(\nabla\) liefert
+        \[
+            \nabla F = - \left( \diff{u}{x} + \diff{v}{y} + \diff{w}{z} \right) e
+            + \left( \diff{w}{y} - \diff{v}{z} \right) i
+            + \left( \diff{u}{z} - \diff{w}{x} \right) j
+            + \left( \diff{v}{x} - \diff{u}{y} \right) k
+        ,\]
+        das heißt
+        \[
+            \nabla F = - \left( \newdiv F \right) e + \rot F
+        .\]
+    \end{frame}
+
     \section{Fundamentalsatz der Algebra für Quaternionen}
 
+    \begin{frame}
+        \begin{theorem}[\textsc{Eilenberg} und \textsc{Niven}, 1944]
+            Sei \(p\) ein Polynom über \Ham vom Grad \(n > 0\) mit der Form \(p = m + q\), wobei \(m\) ein Monom vom Grad \(n\), und \(q\) ein Polynom vom Grad \(< n\) ist.
+            Dann ist die Abbildung \(p \colon \Ham \to \Ham\) surjektiv; besitzt also insbesondere Nullstellen in \(\Ham\).
+        \end{theorem}
+
+        \uncover<2>{
+        Der Satz verliert seine Gültigkeit, sobald es mehrere Polynome höchsten Grades in \(p\) gibt.
+        So besitzt zum Beispiel \(iX - Xi + 1\) keine Nullstellen in \(\Ham\).
+        }
+    \end{frame}
+
+    \begin{frame}
+        \begin{proof}
+            Leider nicht mit ähnlichen Methoden wie für \(\mathbb{C}\) beweisbar.  
+            Mit topologischen Hilfsmitteln:
+
+            Da in \(p\) das Monom \(n\)-ten Grades für große \(x \in \Ham\) dominiert, gilt
+            \[
+                \lim_{x \to \infty} \abs{p(x)} = \infty
+            .\]
+            Daher ist \(p\) zu einer stetigen Abbildung \(\hat{p} \colon S^4 \to S^4\) der vierdimensionalen Sphäre in sich mit \(\hat{p} := \infty\) fortsetzbar (man fasse \(S^4\) als die Kompaktifizierung von \(\Ham \cong \R^4\) durch einen Punkt \(\infty\) auf).
+            Nun lässt sich zeigen, dass \(\hat{p}\) den topologischen Abbildungsgrad \(n\) hat.
+            Da \(n \neq 0\) nach Voraussetzung, so ist \(\hat{p}\) nach einem Satz der Topologie surjektiv.
+        \end{proof}
+    \end{frame}
+
     \begin{frame}[allowframebreaks]
-        \printbibliography
+        \printbibliography[title={Quellen \& Verweise}]
     \end{frame}
 \end{document}
