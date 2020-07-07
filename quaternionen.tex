@@ -65,6 +65,7 @@
 
 \DeclarePairedDelimiter\abs{\lvert}{\rvert}
 
+\DeclareMathOperator{\spur}{spur}
 \DeclareMathOperator{\kernel}{kern}
 \DeclareMathOperator{\Mat}{Mat}
 \DeclareMathOperator{\End}{End}
@@ -316,6 +317,11 @@
                                         \colon w, z \in \mathbb{C} \right\}
             \] ist eine \(\mathbb{R}\)-Unteralgebra von \(\Mat(2, \mathbb{C})\) mit Einselement \(E_2\).
 
+            Jede Matrix \(A \in \mathcal{H}\) genügt der Gleichung
+            \[
+                A^2 - (\spur A) A + (\det A) E = 0
+            .\] 
+
             \(\mathcal{H}\) ist eine vierdimensionale, assoziative Divisionsalgebra.
         \end{theorem}
     \end{frame}
@@ -325,6 +331,8 @@
             \only<1>{
             Man verifiziert durch Nachrechnen, dass \(\mathcal{H}\) ein vierdimensionaler \(\mathbb{R}\)-UVR von \(\Mat(2, \mathbb{C})\) ist.
             Auch die Abgeschlossenheit bezüglich der Matrizenmultiplikation überprüft man auf diese Weise.
+
+            Die angegebene Gleichung ist ein Spezialfall des Satzes von Cayley-Hamilton.
 
             Die Assoziativität ist klar, da \(\Mat(2, \mathbb{C})\) assoziativ ist.
             }
@@ -400,12 +408,29 @@
             .\] 
         \end{definition}
 
-        \uncover<2>{
         Aus dieser Darstellung folgert man, dass es zu jedem \(u \in \Im(\Ham), \, u \neq 0,\) einen Skalar \(\varrho\) mit \((\varrho u)^2 = - e\) gibt.
         (Man kann also normieren.)
 
         Wegen \(x^2 \in \R e \nsubseteq \Im(\Ham)\) ist \(\Im(\Ham)\) keine \(\R\)-Unteralgebra von \(\Ham\).
-        }
+    \end{frame}
+
+    \begin{frame}
+        Wir wollen zeigen, dass die beiden Darstellungen tatsächlich übereinstimmen.
+
+        Sei \(x \in \Ham\).
+        Wir setzen \(F(x) =: X \in \mathcal{H}\).
+        Wie oben besprochen erfüllt jede solche Matrix den Satz von Cayley-Hamilton:
+        \begin{alignat*}{3}
+                 &&X^2 - 2 \alpha X + \left( \alpha^2 + \beta^2 + \gamma^2 + \delta^2 \right) E &= 0 \\
+            \iff &&X^2 &= 2 \alpha X - \left( \alpha^2 + \beta^2 + \gamma^2 + \delta^2 \right) E \\
+            \iff &&x^2 &= 2 \alpha x - \left( \alpha^2 + \beta^2 + \gamma^2 + \delta^2 \right) e
+        \end{alignat*}
+        Sei jetzt \(\Im(\Ham)\), also \(\alpha = 0\).
+        Daher
+        \[
+            x^2 = \underbrace{- \left( \beta^2 + \gamma^2 + \delta^2 \right)}_{\in \, \R} e \iff x^2 \in \R e
+        ,\] 
+        und das zeigt die Behauptung.
     \end{frame}
 
     \begin{frame}
@@ -424,6 +449,8 @@
         von \(x\).
 
     \end{frame}
+
+    \subsection{Quaternionenmultiplikation}
 
     \begin{frame}
         Seien
